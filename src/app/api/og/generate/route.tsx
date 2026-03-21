@@ -1,20 +1,20 @@
 import { ImageResponse } from "next/og";
-import { baseURL, person } from "@/resources";
+import { baseURL, product } from "@/resources";
 
 export const runtime = "nodejs";
 
 export async function GET(request: Request) {
-  let url = new URL(request.url);
-  let title = url.searchParams.get("title") || "Portfolio";
+  const url = new URL(request.url);
+  const title = url.searchParams.get("title") || product.name;
 
   async function loadGoogleFont(font: string) {
-    const url = `https://fonts.googleapis.com/css2?family=${font}`;
-    const css = await (await fetch(url)).text();
+    const fontUrl = `https://fonts.googleapis.com/css2?family=${font}`;
+    const css = await (await fetch(fontUrl)).text();
     const resource = css.match(/src: url\((.+)\) format\('(opentype|truetype)'\)/);
 
     if (resource) {
       const response = await fetch(resource[1]);
-      if (response.status == 200) {
+      if (response.status === 200) {
         return await response.arrayBuffer();
       }
     }
@@ -29,7 +29,7 @@ export async function GET(request: Request) {
         width: "100%",
         height: "100%",
         padding: "6rem",
-        background: "#151515",
+        background: "#0f0a1e",
       }}
     >
       <div
@@ -37,19 +37,17 @@ export async function GET(request: Request) {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          gap: "4rem",
+          gap: "3rem",
           fontStyle: "normal",
           color: "white",
         }}
       >
         <span
           style={{
-            padding: "1rem",
-            fontSize: "6rem",
-            lineHeight: "8rem",
-            letterSpacing: "-0.05em",
-            whiteSpace: "wrap",
-            textWrap: "balance",
+            fontSize: "5rem",
+            lineHeight: "6rem",
+            letterSpacing: "-0.03em",
+            whiteSpace: "pre-wrap",
             overflow: "hidden",
           }}
         >
@@ -58,48 +56,28 @@ export async function GET(request: Request) {
         <div
           style={{
             display: "flex",
-            alignItems: "center",
-            gap: "5rem",
+            flexDirection: "column",
+            gap: "0.75rem",
           }}
         >
-          <img
-            src={baseURL + person.avatar}
+          <span
             style={{
-              width: "12rem",
-              height: "12rem",
-              objectFit: "cover",
-              borderRadius: "100%",
-            }}
-          />
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.75rem",
+              fontSize: "3rem",
+              lineHeight: "3.5rem",
+              opacity: "0.9",
             }}
           >
-            <span
-              style={{
-                fontSize: "4.5rem",
-                lineHeight: "4.5rem",
-                whiteSpace: "pre-wrap",
-                textWrap: "balance",
-              }}
-            >
-              {person.name}
-            </span>
-            <span
-              style={{
-                fontSize: "2.5rem",
-                lineHeight: "2.5rem",
-                whiteSpace: "pre-wrap",
-                textWrap: "balance",
-                opacity: "0.6",
-              }}
-            >
-              {person.role}
-            </span>
-          </div>
+            {product.name}
+          </span>
+          <span
+            style={{
+              fontSize: "1.5rem",
+              lineHeight: "2rem",
+              opacity: "0.6",
+            }}
+          >
+            {product.tagline}
+          </span>
         </div>
       </div>
     </div>,

@@ -1,4 +1,4 @@
-import { Column, Heading, Text } from "@once-ui-system/core";
+import { Column, Heading, Text, Button } from "@once-ui-system/core";
 
 export default function NotFound() {
   return (
@@ -9,7 +9,12 @@ export default function NotFound() {
       <Heading marginBottom="l" variant="display-default-xs">
         Page Not Found
       </Heading>
-      <Text onBackground="neutral-weak">The page you are looking for does not exist.</Text>
+      <Text onBackground="neutral-weak" marginBottom="l">
+        The page you are looking for does not exist.
+      </Text>
+      <Button href="/" variant="secondary">
+        Back to Home
+      </Button>
     </Column>
   );
 }
