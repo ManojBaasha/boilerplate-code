@@ -1,0 +1,42 @@
+@use "../breakpoints.scss" as breakpoints;
+
+.chartContainer {
+  width: 100%;
+  overflow: hidden;
+}
+
+.trendUp {
+  color: var(--accent-solid-strong);
+}
+
+.trendDown {
+  color: var(--scheme-brand-600, #ef4444);
+}
+
+.statusCompleted {
+  background: var(--accent-alpha-weak);
+  color: var(--accent-on-background-strong);
+}
+
+.statusPending {
+  background: var(--neutral-alpha-weak);
+  color: var(--neutral-on-background-strong);
+}
+
+.statusProcessing {
+  background: var(--brand-alpha-weak);
+  color: var(--brand-on-background-strong);
+}
+
+.tableRow {
+  border-bottom: 1px solid var(--neutral-border-weak);
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.bar {
+  transform-origin: bottom;
+  animation: growUp 0.6s ease-out forwards;
+}

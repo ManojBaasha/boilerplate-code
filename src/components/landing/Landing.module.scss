@@ -1,0 +1,74 @@
+@use "../breakpoints.scss" as breakpoints;
+
+.terminal {
+  position: relative;
+  overflow: hidden;
+}
+
+.terminalDots {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.terminalDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dotRed { background: #ff5f57; }
+.dotYellow { background: #febc2e; }
+.dotGreen { background: #28c840; }
+
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 18px;
+  background: var(--brand-solid-strong);
+  margin-left: 4px;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+
+.workflowConnector {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.connectorLine {
+  width: 48px;
+  height: 2px;
+  background: var(--neutral-border-medium);
+}
+
+@media (max-width: breakpoints.$s) {
+  .connectorLine {
+    width: 2px;
+    height: 32px;
+  }
+}
+
+.stepNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--brand-alpha-weak);
+  border: 1px solid var(--brand-border-medium);
+  font-weight: 600;
+  color: var(--brand-on-background-strong);
+  flex-shrink: 0;
+}
+
+.featureCard {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-2px);
+}
