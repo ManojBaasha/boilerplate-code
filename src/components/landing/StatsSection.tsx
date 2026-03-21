@@ -1,28 +1,19 @@
-import { Column, Heading, RevealFx, Row, Text } from "@once-ui-system/core";
+import { FadeIn } from "@/components/FadeIn";
 import { home } from "@/resources";
 
-export const StatsSection = () => {
+export function StatsSection() {
   return (
-    <Row fillWidth gap="16" horizontal="center" paddingY="48" wrap>
+    <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-4 py-12">
       {home.stats.map((stat, i) => (
-        <RevealFx key={stat.label} translateY="4" delay={0.1 * i} style={{ flex: "1 1 200px", maxWidth: "260px" }}>
-          <Column
-            horizontal="center"
-            gap="4"
-            padding="l"
-            background="surface"
-            border="neutral-alpha-weak"
-            radius="l"
-          >
-            <Heading variant="display-strong-l" onBackground="brand-strong">
+        <FadeIn key={stat.label} delay={0.1 * i}>
+          <div className="flex flex-col items-center gap-1 p-6 bg-[var(--surface)] border border-[var(--border)] rounded-xl">
+            <span className="text-3xl md:text-4xl font-bold text-[var(--brand-solid)]">
               {stat.value}
-            </Heading>
-            <Text variant="body-default-s" onBackground="neutral-weak" align="center">
-              {stat.label}
-            </Text>
-          </Column>
-        </RevealFx>
+            </span>
+            <span className="text-sm text-[var(--muted)] text-center">{stat.label}</span>
+          </div>
+        </FadeIn>
       ))}
-    </Row>
+    </div>
   );
-};
+}

@@ -2,10 +2,8 @@ import { IconType } from "react-icons";
 
 import {
   HiArrowUpRight,
-  HiOutlineLink,
-  HiArrowTopRightOnSquare,
-  HiEnvelope,
   HiArrowRight,
+  HiEnvelope,
   HiOutlineCommandLine,
   HiOutlineCpuChip,
   HiOutlineCodeBracket,
@@ -19,6 +17,8 @@ import {
   HiOutlineEye,
   HiOutlineRocketLaunch,
   HiOutlineDocument,
+  HiOutlineSun,
+  HiOutlineMoon,
 } from "react-icons/hi2";
 
 import {
@@ -33,13 +33,11 @@ export const iconLibrary: Record<string, IconType> = {
   arrowUpRight: HiArrowUpRight,
   arrowRight: HiArrowRight,
   email: HiEnvelope,
-  openLink: HiOutlineLink,
   home: PiHouseDuotone,
   grid: PiGridFourDuotone,
   book: PiBookBookmarkDuotone,
   github: FaGithub,
   twitter: FaXTwitter,
-  arrowUpRightFromSquare: HiArrowTopRightOnSquare,
   document: HiOutlineDocument,
   rocket: HiOutlineRocketLaunch,
   eye: HiOutlineEye,
@@ -53,7 +51,10 @@ export const iconLibrary: Record<string, IconType> = {
   sparkles: HiOutlineSparkles,
   chartBar: HiOutlineChartBar,
   chat: HiOutlineChatBubbleLeft,
+  sun: HiOutlineSun,
+  moon: HiOutlineMoon,
 };
 
-export type IconLibrary = typeof iconLibrary;
-export type IconName = keyof IconLibrary;
+export function getIcon(name: string): IconType | undefined {
+  return iconLibrary[name];
+}

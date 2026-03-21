@@ -1,24 +1,40 @@
-import { Column, Row, Tag, Text } from "@once-ui-system/core";
+import { HiOutlineSparkles, HiOutlineBolt, HiOutlineCpuChip } from "react-icons/hi2";
 
-const models = [
-  { name: "Gemini 2.5 Pro", icon: "sparkles" as const },
-  { name: "Gemini 2.5 Flash", icon: "bolt" as const },
-  { name: "Claude Sonnet", icon: "cpu" as const },
+const providers = [
+  {
+    name: "Google",
+    models: ["Gemini 2.5 Pro", "Gemini 2.5 Flash"],
+    Icon: HiOutlineSparkles,
+  },
+  {
+    name: "Anthropic",
+    models: ["Claude Opus", "Claude Sonnet", "Claude Haiku"],
+    Icon: HiOutlineCpuChip,
+  },
+  {
+    name: "OpenAI",
+    models: ["GPT-4o", "GPT-4o Mini", "o3-mini"],
+    Icon: HiOutlineBolt,
+  },
 ];
 
-export const BuiltWithBar = () => {
+export function BuiltWithBar() {
   return (
-    <Column fillWidth horizontal="center" gap="12" paddingY="24">
-      <Text variant="label-default-s" onBackground="neutral-weak">
-        Powered by
-      </Text>
-      <Row gap="12" horizontal="center" wrap>
-        {models.map((model) => (
-          <Tag key={model.name} variant="neutral" size="l" prefixIcon={model.icon}>
-            {model.name}
-          </Tag>
+    <div className="flex flex-col items-center gap-3 py-6">
+      <span className="text-xs font-medium text-[var(--muted)] uppercase tracking-wider">
+        8 models across 3 providers
+      </span>
+      <div className="flex flex-wrap justify-center gap-3">
+        {providers.map((provider) => (
+          <span
+            key={provider.name}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--surface)] border border-[var(--border)] text-sm"
+          >
+            <provider.Icon className="w-4 h-4 text-[var(--brand-solid)]" />
+            {provider.name}
+          </span>
         ))}
-      </Row>
-    </Column>
+      </div>
+    </div>
   );
-};
+}

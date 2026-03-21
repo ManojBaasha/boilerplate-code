@@ -1,30 +1,28 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { Row, ToggleButton, useTheme } from "@once-ui-system/core";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import { HiOutlineSun, HiOutlineMoon } from "react-icons/hi2";
 
-export const ThemeToggle: React.FC = () => {
+export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [currentTheme, setCurrentTheme] = useState("light");
 
-  useEffect(() => {
-    setMounted(true);
-    setCurrentTheme(document.documentElement.getAttribute("data-theme") || "light");
-  }, []);
+  useEffect(() => setMounted(true), []);
 
-  useEffect(() => {
-    setCurrentTheme(document.documentElement.getAttribute("data-theme") || "light");
-  }, [theme]);
-
-  const icon = currentTheme === "dark" ? "light" : "dark";
-  const nextTheme = currentTheme === "light" ? "dark" : "light";
+  if (!mounted) return <div className="w-9 h-9" />;
 
   return (
-    <ToggleButton
-      prefixIcon={icon}
-      onClick={() => setTheme(nextTheme)}
-      aria-label={`Switch to ${nextTheme} mode`}
-    />
+    <button
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      className="p-2 rounded-lg hover:bg-[var(--surface)] transition-colors cursor-pointer"
+      aria-label="Toggle theme"
+    >
+      {theme === "dark" ? (
+        <HiOutlineSun className="w-5 h-5" />
+      ) : (
+        <HiOutlineMoon className="w-5 h-5" />
+      )}
+    </button>
   );
-};
+}

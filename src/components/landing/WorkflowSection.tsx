@@ -1,52 +1,44 @@
 "use client";
 
-import { Column, Heading, Icon, RevealFx, Row, Text } from "@once-ui-system/core";
+import { FadeIn } from "@/components/FadeIn";
+import { iconLibrary } from "@/resources/icons";
 import { home } from "@/resources";
-import styles from "./Landing.module.scss";
 
-export const WorkflowSection = () => {
+export function WorkflowSection() {
   return (
-    <Column id="workflow" fillWidth gap="l" horizontal="center" paddingY="48">
-      <RevealFx translateY="8">
-        <Column horizontal="center" gap="8">
-          <Heading variant="display-strong-s" align="center">
-            How it works
-          </Heading>
-          <Text variant="body-default-l" onBackground="neutral-weak" align="center">
-            Four steps from idea to merged code
-          </Text>
-        </Column>
-      </RevealFx>
-      <Row fillWidth horizontal="center" gap="0" wrap s={{ direction: "column", horizontal: "center" }}>
-        {home.workflow.map((step, i) => (
-          <RevealFx key={step.step} translateY="8" delay={0.1 * i}>
-            <Row vertical="center" gap="0" s={{ direction: "column" }}>
-              <Column horizontal="center" gap="12" padding="16" style={{ minWidth: 160 }}>
-                <div className={styles.stepNumber}>
-                  <Icon name={step.icon} size="m" />
-                </div>
-                <Heading variant="heading-strong-s" align="center">
-                  {step.title}
-                </Heading>
-                <Column maxWidth={12}>
-                  <Text
-                    variant="body-default-s"
-                    onBackground="neutral-weak"
-                    align="center"
-                  >
+    <div id="workflow" className="w-full flex flex-col items-center gap-8 py-12">
+      <FadeIn>
+        <div className="text-center space-y-2">
+          <h2 className="text-3xl md:text-4xl font-bold">How it works</h2>
+          <p className="text-lg text-[var(--muted)]">Four steps from idea to merged code</p>
+        </div>
+      </FadeIn>
+      <div className="flex flex-col md:flex-row items-center justify-center gap-0">
+        {home.workflow.map((step, i) => {
+          const Icon = iconLibrary[step.icon];
+          return (
+            <FadeIn key={step.step} delay={0.1 * i}>
+              <div className="flex flex-col md:flex-row items-center">
+                <div className="flex flex-col items-center gap-3 px-4 py-4 min-w-[160px]">
+                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-[var(--brand-bg)] border border-[var(--brand-border)]">
+                    {Icon && <Icon className="w-5 h-5 text-[var(--brand-solid)]" />}
+                  </div>
+                  <h3 className="text-lg font-semibold text-center">{step.title}</h3>
+                  <p className="text-sm text-[var(--muted)] text-center max-w-[140px]">
                     {step.description}
-                  </Text>
-                </Column>
-              </Column>
-              {i < home.workflow.length - 1 && (
-                <div className={styles.workflowConnector}>
-                  <div className={styles.connectorLine} />
+                  </p>
                 </div>
-              )}
-            </Row>
-          </RevealFx>
-        ))}
-      </Row>
-    </Column>
+                {i < home.workflow.length - 1 && (
+                  <>
+                    <div className="hidden md:block w-12 h-0.5 bg-[var(--border)]" />
+                    <div className="md:hidden w-0.5 h-8 bg-[var(--border)]" />
+                  </>
+                )}
+              </div>
+            </FadeIn>
+          );
+        })}
+      </div>
+    </div>
   );
-};
+}

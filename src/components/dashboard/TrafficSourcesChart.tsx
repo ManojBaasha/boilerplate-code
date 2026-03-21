@@ -1,9 +1,8 @@
 "use client";
 
-import { Column, Row, Text } from "@once-ui-system/core";
 import { trafficSources } from "@/data/dashboard";
 
-export const TrafficSourcesChart = () => {
+export function TrafficSourcesChart() {
   const total = trafficSources.reduce((sum, s) => sum + s.value, 0);
   const circumference = 2 * Math.PI * 35;
 
@@ -16,56 +15,24 @@ export const TrafficSourcesChart = () => {
   });
 
   return (
-    <Column
-      flex={1}
-      background="surface"
-      border="neutral-alpha-weak"
-      radius="l"
-      padding="l"
-      gap="12"
-      horizontal="center"
-      minWidth={10}
-    >
-      <Text variant="label-default-s" onBackground="neutral-weak">
-        Traffic Sources
-      </Text>
+    <div className="flex-1 min-w-[160px] flex flex-col items-center gap-3 p-6 bg-[var(--surface)] border border-[var(--border)] rounded-xl">
+      <span className="text-xs font-medium text-[var(--muted)] self-start">Traffic Sources</span>
       <svg viewBox="0 0 90 90" width="120" height="120">
         {segments.map((s) => (
-          <circle
-            key={s.source}
-            cx="45"
-            cy="45"
-            r="35"
-            fill="none"
-            stroke={s.color}
-            strokeWidth="10"
-            strokeDasharray={`${s.dash} ${circumference - s.dash}`}
-            strokeDashoffset={s.offset}
-            transform="rotate(-90 45 45)"
-          />
+          <circle key={s.source} cx="45" cy="45" r="35" fill="none" stroke={s.color} strokeWidth="10" strokeDasharray={`${s.dash} ${circumference - s.dash}`} strokeDashoffset={s.offset} transform="rotate(-90 45 45)" />
         ))}
       </svg>
-      <Column gap="8" fillWidth>
+      <div className="flex flex-col gap-2 w-full">
         {trafficSources.map((s) => (
-          <Row key={s.source} vertical="center" gap="8" fillWidth horizontal="between">
-            <Row vertical="center" gap="8">
-              <div
-                style={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: "50%",
-                  background: s.color,
-                  flexShrink: 0,
-                }}
-              />
-              <Text variant="label-default-s" onBackground="neutral-weak">
-                {s.source}
-              </Text>
-            </Row>
-            <Text variant="label-default-s">{s.value}%</Text>
-          </Row>
+          <div key={s.source} className="flex items-center justify-between w-full">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full shrink-0" style={{ background: s.color }} />
+              <span className="text-xs text-[var(--muted)]">{s.source}</span>
+            </div>
+            <span className="text-xs">{s.value}%</span>
+          </div>
         ))}
-      </Column>
-    </Column>
+      </div>
+    </div>
   );
-};
+}

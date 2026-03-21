@@ -1,24 +1,14 @@
-import { Column, Heading, Icon, Text } from "@once-ui-system/core";
-import { Feature } from "@/types";
-import styles from "./Landing.module.scss";
+import { iconLibrary } from "@/resources/icons";
+import type { Feature } from "@/types";
 
-export const FeatureCard = ({ icon, title, description }: Feature) => {
+export function FeatureCard({ icon, title, description }: Feature) {
+  const Icon = iconLibrary[icon];
+
   return (
-    <Column
-      className={styles.featureCard}
-      background="surface"
-      border="neutral-alpha-weak"
-      radius="l"
-      padding="l"
-      gap="12"
-      flex={1}
-      minWidth={16}
-    >
-      <Icon name={icon} size="l" onBackground="brand-medium" />
-      <Heading variant="heading-strong-s">{title}</Heading>
-      <Text variant="body-default-s" onBackground="neutral-weak">
-        {description}
-      </Text>
-    </Column>
+    <div className="flex flex-col gap-3 p-6 bg-[var(--surface)] border border-[var(--border)] rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-lg">
+      {Icon && <Icon className="w-6 h-6 text-[var(--brand-solid)]" />}
+      <h3 className="text-lg font-semibold">{title}</h3>
+      <p className="text-sm text-[var(--muted)]">{description}</p>
+    </div>
   );
-};
+}

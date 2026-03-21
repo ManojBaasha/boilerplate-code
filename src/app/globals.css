@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@theme {
+  --font-heading: "Geist", system-ui, sans-serif;
+  --font-body: "Geist", system-ui, sans-serif;
+  --font-code: "Geist Mono", monospace;
+
+  --color-brand-50: #f5f3ff;
+  --color-brand-100: #ede9fe;
+  --color-brand-200: #ddd6fe;
+  --color-brand-300: #c4b5fd;
+  --color-brand-400: #a78bfa;
+  --color-brand-500: #8b5cf6;
+  --color-brand-600: #7c3aed;
+  --color-brand-700: #6d28d9;
+  --color-brand-800: #5b21b6;
+  --color-brand-900: #4c1d95;
+  --color-brand-950: #2e1065;
+
+  --color-accent-50: #ecfdf5;
+  --color-accent-100: #d1fae5;
+  --color-accent-200: #a7f3d0;
+  --color-accent-300: #6ee7b7;
+  --color-accent-400: #34d399;
+  --color-accent-500: #10b981;
+  --color-accent-600: #059669;
+  --color-accent-700: #047857;
+  --color-accent-800: #065f46;
+  --color-accent-900: #064e3b;
+
+  --animate-fade-in-up: fadeInUp 0.5s ease-out forwards;
+  --animate-blink: blink 1s step-end infinite;
+  --animate-grow-up: growUp 0.6s ease-out forwards;
+  --animate-spin: spin 1s linear infinite;
+}
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #0a0a0a;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --surface: rgba(0, 0, 0, 0.03);
+    --brand-solid: #7c3aed;
+    --brand-bg: rgba(124, 58, 237, 0.08);
+    --brand-border: rgba(124, 58, 237, 0.3);
+    --accent-solid: #10b981;
+    --accent-bg: rgba(16, 185, 129, 0.08);
+  }
+
+  .dark {
+    --background: #09090b;
+    --foreground: #fafafa;
+    --muted: #a1a1aa;
+    --border: #27272a;
+    --surface: rgba(255, 255, 255, 0.05);
+    --brand-solid: #8b5cf6;
+    --brand-bg: rgba(139, 92, 246, 0.1);
+    --brand-border: rgba(139, 92, 246, 0.3);
+    --accent-solid: #34d399;
+    --accent-bg: rgba(52, 211, 153, 0.1);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes growUp {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dot-pattern {
+  background-image: radial-gradient(circle, var(--brand-solid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.06;
+}

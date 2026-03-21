@@ -14,10 +14,10 @@ export const revenueData = [
 ];
 
 export const trafficSources = [
-  { source: "Direct", value: 35, color: "var(--brand-solid-strong)" },
-  { source: "Organic", value: 28, color: "var(--accent-solid-strong)" },
-  { source: "Referral", value: 22, color: "var(--brand-background-strong)" },
-  { source: "Social", value: 15, color: "var(--neutral-solid-medium)" },
+  { source: "Direct", value: 35, color: "var(--brand-solid)" },
+  { source: "Organic", value: 28, color: "var(--accent-solid)" },
+  { source: "Referral", value: 22, color: "var(--brand-border)" },
+  { source: "Social", value: 15, color: "var(--muted)" },
 ];
 
 export const userGrowthData = [

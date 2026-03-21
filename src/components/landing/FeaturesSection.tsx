@@ -1,27 +1,27 @@
-import { Column, Heading, RevealFx, Row, Text } from "@once-ui-system/core";
+import { FadeIn } from "@/components/FadeIn";
 import { home } from "@/resources";
 import { FeatureCard } from "./FeatureCard";
 
-export const FeaturesSection = () => {
+export function FeaturesSection() {
   return (
-    <Column fillWidth gap="l" horizontal="center" paddingY="48">
-      <RevealFx translateY="8">
-        <Column horizontal="center" gap="8">
-          <Heading variant="display-strong-s" align="center">
+    <div className="w-full flex flex-col items-center gap-8 py-12">
+      <FadeIn>
+        <div className="text-center space-y-2">
+          <h2 className="text-3xl md:text-4xl font-bold">
             Everything you need to fix UI with AI
-          </Heading>
-          <Text variant="body-default-l" onBackground="neutral-weak" align="center">
+          </h2>
+          <p className="text-lg text-[var(--muted)]">
             From natural language to merged PR in under a minute
-          </Text>
-        </Column>
-      </RevealFx>
-      <Row fillWidth gap="16" wrap horizontal="center">
+          </p>
+        </div>
+      </FadeIn>
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {home.features.map((feature, i) => (
-          <RevealFx key={feature.title} translateY="8" delay={0.05 * i} style={{ flex: "1 1 280px", maxWidth: "400px" }}>
+          <FadeIn key={feature.title} delay={0.05 * i}>
             <FeatureCard {...feature} />
-          </RevealFx>
+          </FadeIn>
         ))}
-      </Row>
-    </Column>
+      </div>
+    </div>
   );
-};
+}

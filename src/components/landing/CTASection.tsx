@@ -1,60 +1,42 @@
-import { Background, Button, Column, Heading, RevealFx, Row, Text } from "@once-ui-system/core";
+import Link from "next/link";
+import { HiArrowRight } from "react-icons/hi2";
+import { FaGithub } from "react-icons/fa6";
+import { FadeIn } from "@/components/FadeIn";
 import { social } from "@/resources";
 
-export const CTASection = () => {
+export function CTASection() {
   const githubLink = social.find((s) => s.name === "GitHub")?.link || "#";
 
   return (
-    <RevealFx translateY="8">
-      <Column
-        fillWidth
-        horizontal="center"
-        gap="l"
-        padding="xl"
-        radius="l"
-        border="brand-alpha-medium"
-        background="surface"
-        position="relative"
-        overflow="hidden"
-      >
-        <Background
-          gradient={{
-            display: true,
-            opacity: 80,
-            x: 50,
-            y: 0,
-            width: 100,
-            height: 100,
-            tilt: 0,
-            colorStart: "brand-background-strong",
-            colorEnd: "static-transparent",
-          }}
-          dots={{
-            display: true,
-            opacity: 20,
-            size: "2",
-            color: "brand-on-background-weak",
-          }}
-        />
-        <Heading variant="display-strong-s" align="center">
+    <FadeIn>
+      <div className="relative w-full flex flex-col items-center gap-6 p-12 rounded-xl border border-[var(--brand-border)] bg-[var(--surface)] overflow-hidden">
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--brand-bg)] to-transparent pointer-events-none" />
+        <div className="absolute inset-0 dot-pattern pointer-events-none" />
+
+        <h2 className="relative text-3xl md:text-4xl font-bold text-center">
           Ready to fix your UI with AI?
-        </Heading>
-        <Text
-          variant="body-default-l"
-          onBackground="neutral-weak"
-          align="center"
-        >
+        </h2>
+        <p className="relative text-lg text-[var(--muted)] text-center">
           Connect your repo and start generating fixes in seconds.
-        </Text>
-        <Row gap="16" horizontal="center">
-          <Button href={githubLink} variant="primary" suffixIcon="arrowRight" size="l">
+        </p>
+        <div className="relative flex gap-4">
+          <Link
+            href={githubLink}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--brand-solid)] text-white rounded-lg font-medium hover:opacity-90 transition"
+          >
             Get Started
-          </Button>
-          <Button href={githubLink} variant="secondary" prefixIcon="github" size="l">
+            <HiArrowRight className="w-4 h-4" />
+          </Link>
+          <Link
+            href={githubLink}
+            className="inline-flex items-center gap-2 px-6 py-3 border border-[var(--border)] rounded-lg font-medium hover:bg-[var(--surface)] transition"
+          >
+            <FaGithub className="w-4 h-4" />
             View Source
-          </Button>
-        </Row>
-      </Column>
-    </RevealFx>
+          </Link>
+        </div>
+      </div>
+    </FadeIn>
   );
-};
+}

@@ -1,81 +1,36 @@
-import { Column, Row, Text } from "@once-ui-system/core";
 import { recentOrders } from "@/data/dashboard";
-import styles from "./Dashboard.module.scss";
+import { cn } from "@/lib/utils";
 
-const statusClass = {
-  Completed: styles.statusCompleted,
-  Pending: styles.statusPending,
-  Processing: styles.statusProcessing,
+const statusStyles = {
+  Completed: "bg-[var(--accent-bg)] text-[var(--accent-solid)]",
+  Pending: "bg-[var(--surface)] text-[var(--muted)]",
+  Processing: "bg-[var(--brand-bg)] text-[var(--brand-solid)]",
 };
 
-export const RecentOrdersTable = () => {
+export function RecentOrdersTable() {
   return (
-    <Column
-      flex={1}
-      background="surface"
-      border="neutral-alpha-weak"
-      radius="l"
-      padding="l"
-      gap="12"
-      minWidth={12}
-    >
-      <Text variant="label-default-s" onBackground="neutral-weak">
-        Recent Orders
-      </Text>
-      <Column fillWidth gap="0">
-        <Row
-          fillWidth
-          paddingY="8"
-          paddingX="4"
-          style={{ borderBottom: "1px solid var(--neutral-border-weak)" }}
-        >
-          <Row flex={1}>
-            <Text variant="label-default-s" onBackground="neutral-weak">Order</Text>
-          </Row>
-          <Row flex={2}>
-            <Text variant="label-default-s" onBackground="neutral-weak">Customer</Text>
-          </Row>
-          <Row flex={1}>
-            <Text variant="label-default-s" onBackground="neutral-weak">Amount</Text>
-          </Row>
-          <Row flex={1}>
-            <Text variant="label-default-s" onBackground="neutral-weak">Status</Text>
-          </Row>
-        </Row>
+    <div className="flex-1 min-w-[200px] flex flex-col gap-3 p-6 bg-[var(--surface)] border border-[var(--border)] rounded-xl">
+      <span className="text-xs font-medium text-[var(--muted)]">Recent Orders</span>
+      <div className="w-full">
+        <div className="flex w-full py-2 px-1 border-b border-[var(--border)]">
+          <span className="flex-1 text-xs font-medium text-[var(--muted)]">Order</span>
+          <span className="flex-[2] text-xs font-medium text-[var(--muted)]">Customer</span>
+          <span className="flex-1 text-xs font-medium text-[var(--muted)]">Amount</span>
+          <span className="flex-1 text-xs font-medium text-[var(--muted)]">Status</span>
+        </div>
         {recentOrders.map((order) => (
-          <Row
-            key={order.id}
-            fillWidth
-            paddingY="8"
-            paddingX="4"
-            className={styles.tableRow}
-            vertical="center"
-          >
-            <Row flex={1}>
-              <Text variant="code-default-s">{order.id}</Text>
-            </Row>
-            <Row flex={2}>
-              <Text variant="body-default-s">{order.customer}</Text>
-            </Row>
-            <Row flex={1}>
-              <Text variant="body-default-s">{order.amount}</Text>
-            </Row>
-            <Row flex={1}>
-              <span
-                className={statusClass[order.status]}
-                style={{
-                  padding: "2px 8px",
-                  borderRadius: "6px",
-                  fontSize: "11px",
-                  fontWeight: 500,
-                }}
-              >
+          <div key={order.id} className="flex w-full py-2 px-1 border-b border-[var(--border)] last:border-0 items-center">
+            <span className="flex-1 text-sm font-mono">{order.id}</span>
+            <span className="flex-[2] text-sm">{order.customer}</span>
+            <span className="flex-1 text-sm">{order.amount}</span>
+            <span className="flex-1">
+              <span className={cn("px-2 py-0.5 rounded-md text-[11px] font-medium", statusStyles[order.status])}>
                 {order.status}
               </span>
-            </Row>
-          </Row>
+            </span>
+          </div>
         ))}
-      </Column>
-    </Column>
+      </div>
+    </div>
   );
-};
+}

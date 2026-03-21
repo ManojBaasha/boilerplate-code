@@ -1,139 +1,62 @@
 "use client";
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-import { Fade, Flex, Line, Row, Text, ToggleButton } from "@once-ui-system/core";
-
+import { PiHouseDuotone } from "react-icons/pi";
+import { HiOutlineChartBar, HiOutlineCommandLine } from "react-icons/hi2";
+import { PiBookBookmarkDuotone } from "react-icons/pi";
+import { cn } from "@/lib/utils";
 import { routes, display, dashboard, prompts, docs } from "@/resources";
 import { ThemeToggle } from "./ThemeToggle";
-import styles from "./Header.module.scss";
 
-export const Header = () => {
+const navItems = [
+  { path: "/", label: "Home", icon: PiHouseDuotone, configKey: "/" },
+  { path: "/dashboard", label: dashboard.label, icon: HiOutlineChartBar, configKey: "/dashboard" },
+  { path: "/prompts", label: prompts.label, icon: HiOutlineCommandLine, configKey: "/prompts" },
+  { path: "/docs", label: docs.label, icon: PiBookBookmarkDuotone, configKey: "/docs" },
+];
+
+export function Header() {
   const pathname = usePathname() ?? "";
 
   return (
-    <>
-      <Fade s={{ hide: true }} fillWidth position="fixed" height="80" zIndex={9} />
-      <Fade
-        hide
-        s={{ hide: false }}
-        fillWidth
-        position="fixed"
-        bottom="0"
-        to="top"
-        height="80"
-        zIndex={9}
-      />
-      <Row
-        fitHeight
-        className={styles.position}
-        position="sticky"
-        as="header"
-        zIndex={9}
-        fillWidth
-        padding="8"
-        horizontal="center"
-        data-border="rounded"
-        s={{
-          position: "fixed",
-        }}
-      >
-        <Row paddingLeft="12" fillWidth vertical="center" textVariant="body-default-s">
-          <Row s={{ hide: true }} gap="8" vertical="center">
-            <Text variant="heading-strong-s">MergeWorthy</Text>
-          </Row>
-        </Row>
-        <Row fillWidth horizontal="center">
-          <Row
-            background="page"
-            border="neutral-alpha-weak"
-            radius="m-4"
-            shadow="l"
-            padding="4"
-            horizontal="center"
-            zIndex={1}
-          >
-            <Row gap="4" vertical="center" textVariant="body-default-s">
-              {routes["/"] && (
-                <ToggleButton prefixIcon="home" href="/" selected={pathname === "/"} />
+    <header className="sticky top-0 z-50 w-full p-2 flex justify-center">
+      {/* Desktop fade top */}
+      <div className="fixed top-0 left-0 right-0 h-20 bg-gradient-to-b from-[var(--background)] to-transparent pointer-events-none z-40 hidden md:block" />
+
+      <nav className="relative z-50 flex items-center gap-1 px-1.5 py-1.5 rounded-xl border border-[var(--border)] bg-[var(--background)]/80 backdrop-blur-xl shadow-lg">
+        {navItems.map((item) => {
+          if (!routes[item.configKey]) return null;
+          const isActive = item.path === "/" ? pathname === "/" : pathname === item.path;
+          const Icon = item.icon;
+
+          return (
+            <Link
+              key={item.path}
+              href={item.path}
+              className={cn(
+                "flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors",
+                isActive
+                  ? "bg-[var(--surface)] text-[var(--foreground)]"
+                  : "text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--surface)]"
               )}
-              <Line background="neutral-alpha-medium" vert maxHeight="24" />
-              {routes["/dashboard"] && (
-                <>
-                  <Row s={{ hide: true }}>
-                    <ToggleButton
-                      prefixIcon="chartBar"
-                      href="/dashboard"
-                      label={dashboard.label}
-                      selected={pathname === "/dashboard"}
-                    />
-                  </Row>
-                  <Row hide s={{ hide: false }}>
-                    <ToggleButton
-                      prefixIcon="chartBar"
-                      href="/dashboard"
-                      selected={pathname === "/dashboard"}
-                    />
-                  </Row>
-                </>
-              )}
-              {routes["/prompts"] && (
-                <>
-                  <Row s={{ hide: true }}>
-                    <ToggleButton
-                      prefixIcon="terminal"
-                      href="/prompts"
-                      label={prompts.label}
-                      selected={pathname === "/prompts"}
-                    />
-                  </Row>
-                  <Row hide s={{ hide: false }}>
-                    <ToggleButton
-                      prefixIcon="terminal"
-                      href="/prompts"
-                      selected={pathname === "/prompts"}
-                    />
-                  </Row>
-                </>
-              )}
-              {routes["/docs"] && (
-                <>
-                  <Row s={{ hide: true }}>
-                    <ToggleButton
-                      prefixIcon="book"
-                      href="/docs"
-                      label={docs.label}
-                      selected={pathname === "/docs"}
-                    />
-                  </Row>
-                  <Row hide s={{ hide: false }}>
-                    <ToggleButton
-                      prefixIcon="book"
-                      href="/docs"
-                      selected={pathname === "/docs"}
-                    />
-                  </Row>
-                </>
-              )}
-              {display.themeSwitcher && (
-                <>
-                  <Line background="neutral-alpha-medium" vert maxHeight="24" />
-                  <ThemeToggle />
-                </>
-              )}
-            </Row>
-          </Row>
-        </Row>
-        <Flex fillWidth horizontal="end" vertical="center">
-          <Flex
-            paddingRight="12"
-            horizontal="end"
-            vertical="center"
-            textVariant="body-default-s"
-            gap="20"
-          />
-        </Flex>
-      </Row>
-    </>
+            >
+              <Icon className="w-4 h-4" />
+              <span className="hidden md:inline">{item.label}</span>
+            </Link>
+          );
+        })}
+
+        {display.themeSwitcher && (
+          <>
+            <div className="w-px h-6 bg-[var(--border)] mx-1" />
+            <ThemeToggle />
+          </>
+        )}
+      </nav>
+
+      {/* Mobile bottom fade */}
+      <div className="fixed bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[var(--background)] to-transparent pointer-events-none z-40 md:hidden" />
+    </header>
   );
-};
+}

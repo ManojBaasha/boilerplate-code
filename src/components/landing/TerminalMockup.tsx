@@ -1,51 +1,22 @@
 "use client";
 
-import { Column, Text } from "@once-ui-system/core";
-import styles from "./Landing.module.scss";
-
-export const TerminalMockup = () => {
+export function TerminalMockup() {
   return (
-    <Column
-      className={styles.terminal}
-      background="surface"
-      border="neutral-alpha-weak"
-      radius="l"
-      padding="l"
-      fillWidth
-      maxWidth={32}
-    >
-      <div className={styles.terminalDots}>
-        <div className={`${styles.terminalDot} ${styles.dotRed}`} />
-        <div className={`${styles.terminalDot} ${styles.dotYellow}`} />
-        <div className={`${styles.terminalDot} ${styles.dotGreen}`} />
+    <div className="relative overflow-hidden w-full max-w-xl bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6">
+      <div className="flex gap-1.5 mb-3">
+        <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+        <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+        <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
       </div>
-      <Text
-        variant="code-default-s"
-        onBackground="neutral-weak"
-        marginBottom="8"
-      >
-        $ mergeworthy fix
-      </Text>
-      <Text variant="code-default-s" onBackground="brand-medium">
+      <p className="text-sm font-mono text-[var(--muted)] mb-2">$ mergeworthy fix</p>
+      <p className="text-sm font-mono text-[var(--brand-solid)]">
         &gt; &quot;Make the header sticky and add a subtle shadow on scroll&quot;
-        <span className={styles.cursor} />
-      </Text>
-      <Text
-        variant="code-default-s"
-        onBackground="neutral-weak"
-        marginTop="12"
-      >
-        Generating fixes with 3 AI models...
-      </Text>
-      <Text variant="code-default-s" onBackground="accent-medium">
-        Gemini 2.5 Pro .... deployed
-      </Text>
-      <Text variant="code-default-s" onBackground="accent-medium">
-        Gemini 2.5 Flash .. deployed
-      </Text>
-      <Text variant="code-default-s" onBackground="accent-medium">
-        Claude Sonnet ..... deployed
-      </Text>
-    </Column>
+        <span className="inline-block w-2 h-[18px] bg-[var(--brand-solid)] ml-1 align-text-bottom animate-blink" />
+      </p>
+      <p className="text-sm font-mono text-[var(--muted)] mt-3">Generating fixes with selected models...</p>
+      <p className="text-sm font-mono text-[var(--accent-solid)]">Gemini 2.5 Pro .. deployed</p>
+      <p className="text-sm font-mono text-[var(--accent-solid)]">Claude Sonnet ... deployed</p>
+      <p className="text-sm font-mono text-[var(--accent-solid)]">GPT-4o ......... deployed</p>
+    </div>
   );
-};
+}

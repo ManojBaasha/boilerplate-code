@@ -1,5 +1,3 @@
-import { IconName } from "@/resources/icons";
-
 export type Product = {
   name: string;
   tagline: string;
@@ -8,20 +6,20 @@ export type Product = {
 
 export type Social = Array<{
   name: string;
-  icon: IconName;
+  icon: string;
   link: string;
 }>;
 
 export interface BasePageConfig {
-  path: `/${string}` | string;
+  path: string;
   label: string;
   title: string;
   description: string;
-  image?: `/images/${string}` | string;
+  image?: string;
 }
 
 export type Feature = {
-  icon: IconName;
+  icon: string;
   title: string;
   description: string;
 };
@@ -30,7 +28,7 @@ export type WorkflowStep = {
   step: number;
   title: string;
   description: string;
-  icon: IconName;
+  icon: string;
 };
 
 export type Stat = {
@@ -47,7 +45,7 @@ export type ExamplePrompt = {
 };
 
 export interface Home extends BasePageConfig {
-  image: `/images/${string}` | string;
+  image: string;
   headline: React.ReactNode;
   subline: React.ReactNode;
   featured: {

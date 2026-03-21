@@ -1,71 +1,65 @@
 "use client";
 
-import { Badge, Button, Column, Heading, RevealFx, Row, Text } from "@once-ui-system/core";
-
+import Link from "next/link";
+import { HiArrowRight } from "react-icons/hi2";
+import { FaGithub } from "react-icons/fa6";
+import { FadeIn } from "@/components/FadeIn";
 import { home, social } from "@/resources";
 import { TerminalMockup } from "./TerminalMockup";
 
-export const HeroSection = () => {
+export function HeroSection() {
   const githubLink = social.find((s) => s.name === "GitHub")?.link || "#";
 
   return (
-    <Column fillWidth horizontal="center" gap="l" paddingTop="104" paddingBottom="48">
+    <div className="flex flex-col items-center gap-8 pt-24 pb-12">
       {home.featured.display && (
-        <RevealFx translateY="4" delay={0}>
-          <Badge
-            arrow
+        <FadeIn delay={0}>
+          <a
             href={home.featured.href}
-            background="brand-alpha-weak"
-            paddingX="12"
-            paddingY="4"
-            onBackground="neutral-strong"
-            textVariant="label-default-s"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--brand-bg)] text-sm text-[var(--brand-solid)] hover:opacity-80 transition"
           >
             {home.featured.title}
-          </Badge>
-        </RevealFx>
+            <HiArrowRight className="w-3.5 h-3.5" />
+          </a>
+        </FadeIn>
       )}
 
-      <RevealFx translateY="8" delay={0.1}>
-        <Heading
-          wrap="balance"
-          variant="display-strong-xl"
-          align="center"
-          onBackground="neutral-strong"
-        >
+      <FadeIn delay={0.1}>
+        <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-center text-balance">
           {home.headline}
-        </Heading>
-      </RevealFx>
+        </h1>
+      </FadeIn>
 
-      <RevealFx translateY="8" delay={0.2}>
-        <Column maxWidth={40}>
-          <Text
-            variant="heading-default-l"
-            onBackground="neutral-weak"
-            align="center"
-            wrap="balance"
-          >
+      <FadeIn delay={0.2}>
+        <div className="max-w-2xl">
+          <p className="text-lg md:text-xl text-[var(--muted)] text-center text-balance">
             {home.subline}
-          </Text>
-        </Column>
-      </RevealFx>
+          </p>
+        </div>
+      </FadeIn>
 
-      <RevealFx translateY="8" delay={0.3}>
-        <Row gap="16" horizontal="center" paddingTop="8">
-          <Button href={githubLink} variant="primary" suffixIcon="arrowRight" size="l">
+      <FadeIn delay={0.3}>
+        <div className="flex gap-4 pt-2">
+          <Link
+            href={githubLink}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--brand-solid)] text-white rounded-lg font-medium hover:opacity-90 transition"
+          >
             Get Started
-          </Button>
-          <Button href={githubLink} variant="secondary" prefixIcon="github" size="l">
+            <HiArrowRight className="w-4 h-4" />
+          </Link>
+          <Link
+            href={githubLink}
+            className="inline-flex items-center gap-2 px-6 py-3 border border-[var(--border)] rounded-lg font-medium hover:bg-[var(--surface)] transition"
+          >
+            <FaGithub className="w-4 h-4" />
             View on GitHub
-          </Button>
-        </Row>
-      </RevealFx>
+          </Link>
+        </div>
+      </FadeIn>
 
-      <RevealFx translateY="12" delay={0.4}>
-        <Row paddingTop="24" fillWidth horizontal="center">
-          <TerminalMockup />
-        </Row>
-      </RevealFx>
-    </Column>
+      <FadeIn delay={0.4} className="w-full flex justify-center pt-6">
+        <TerminalMockup />
+      </FadeIn>
+    </div>
   );
-};
+}

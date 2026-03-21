@@ -1,60 +1,38 @@
-import { Column, Row, Tag, Text } from "@once-ui-system/core";
-import { ExamplePrompt } from "@/types";
-import styles from "./Prompts.module.scss";
+import { cn } from "@/lib/utils";
+import { iconLibrary } from "@/resources/icons";
+import type { ExamplePrompt } from "@/types";
 
-const difficultyStyle = {
-  easy: styles.difficultyEasy,
-  medium: styles.difficultyMedium,
-  hard: styles.difficultyHard,
+const difficultyStyles = {
+  easy: "bg-[var(--accent-bg)] text-[var(--accent-solid)]",
+  medium: "bg-[var(--brand-bg)] text-[var(--brand-solid)]",
+  hard: "bg-[var(--surface)] text-[var(--muted)]",
 };
 
-const categoryIcon = {
-  Layout: "grid" as const,
-  Styling: "sparkles" as const,
-  "Data Viz": "chartBar" as const,
-  UX: "eye" as const,
+const categoryIcons: Record<string, string> = {
+  Layout: "grid",
+  Styling: "sparkles",
+  "Data Viz": "chartBar",
+  UX: "eye",
 };
 
-export const PromptCard = ({ prompt, category, difficulty, description }: ExamplePrompt) => {
+export function PromptCard({ prompt, category, difficulty, description }: ExamplePrompt) {
+  const Icon = iconLibrary[categoryIcons[category]];
+
   return (
-    <Column
-      background="surface"
-      border="neutral-alpha-weak"
-      radius="l"
-      padding="l"
-      gap="12"
-      fillWidth
-    >
-      <Row gap="8" vertical="center" wrap>
-        <Tag variant="brand" size="s" prefixIcon={categoryIcon[category]}>
+    <div className="w-full flex flex-col gap-3 p-6 bg-[var(--surface)] border border-[var(--border)] rounded-xl">
+      <div className="flex items-center gap-2 flex-wrap">
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[var(--brand-bg)] text-[var(--brand-solid)] text-xs font-medium">
+          {Icon && <Icon className="w-3.5 h-3.5" />}
           {category}
-        </Tag>
-        <span
-          className={difficultyStyle[difficulty]}
-          style={{
-            padding: "2px 10px",
-            borderRadius: "6px",
-            fontSize: "11px",
-            fontWeight: 500,
-            textTransform: "capitalize",
-          }}
-        >
+        </span>
+        <span className={cn("px-2.5 py-1 rounded-lg text-xs font-medium capitalize", difficultyStyles[difficulty])}>
           {difficulty}
         </span>
-      </Row>
-      <Column
-        background="page"
-        radius="m"
-        padding="12"
-        border="neutral-alpha-weak"
-      >
-        <Text variant="code-default-s" className={styles.promptText}>
-          &quot;{prompt}&quot;
-        </Text>
-      </Column>
-      <Text variant="body-default-s" onBackground="neutral-weak">
-        {description}
-      </Text>
-    </Column>
+      </div>
+      <div className="p-3 bg-[var(--background)] rounded-lg border border-[var(--border)]">
+        <code className="text-sm font-mono">&quot;{prompt}&quot;</code>
+      </div>
+      <p className="text-sm text-[var(--muted)]">{description}</p>
+    </div>
   );
-};
+}

@@ -4,14 +4,14 @@ const product: Product = {
   name: "MergeWorthy",
   tagline: "Your UI fixed by AI. You pick the winner.",
   description:
-    "Describe a UI fix in plain English. Three AI models race to solve it. Compare live Vercel previews side by side. Merge the best one.",
+    "Describe a UI fix in plain English. Up to 8 AI models race to solve it. Compare live Vercel previews side by side. Merge the best one.",
 };
 
 const social: Social = [
   {
     name: "GitHub",
     icon: "github",
-    link: "https://github.com/manojelango/MergeWorthy-AI",
+    link: "https://github.com/ManojBaasha/MergeWorthy-AI",
   },
 ];
 
@@ -21,7 +21,7 @@ const home: Home = {
   label: "Home",
   title: "MergeWorthy-AI | Your UI fixed by AI",
   description:
-    "Describe a UI fix in plain English. Three AI models race to solve it. Compare live previews. Merge the best.",
+    "Describe a UI fix in plain English. Up to 8 AI models race to solve it. Compare live previews. Merge the best.",
   headline: <>Your UI fixed by AI. You pick the winner.</>,
   featured: {
     display: true,
@@ -30,8 +30,8 @@ const home: Home = {
   },
   subline: (
     <>
-      Describe a fix in plain English. Three AI models generate competing
-      solutions. Compare live Vercel previews. Merge the best one.
+      Describe a fix in plain English. Up to 8 AI models from Google, Anthropic,
+      and OpenAI generate competing solutions. Compare live Vercel previews. Merge the best one.
     </>
   ),
   features: [
@@ -43,9 +43,9 @@ const home: Home = {
     },
     {
       icon: "cpu",
-      title: "Triple AI Generation",
+      title: "Multi-Model AI Generation",
       description:
-        "Gemini 2.5 Pro, Gemini 2.5 Flash, and Claude Sonnet compete in parallel.",
+        "8 models from Google, Anthropic, and OpenAI — including Gemini 2.5 Pro, Claude Opus, and GPT-4o — compete in parallel.",
     },
     {
       icon: "compare",
@@ -82,7 +82,7 @@ const home: Home = {
     {
       step: 2,
       title: "Generate",
-      description: "Three AI models create competing solutions in parallel",
+      description: "Up to 8 AI models create competing solutions in parallel",
       icon: "sparkles",
     },
     {
@@ -99,7 +99,7 @@ const home: Home = {
     },
   ],
   stats: [
-    { value: "3", label: "AI Models Racing" },
+    { value: "8", label: "AI Models Available" },
     { value: "<30s", label: "Generation Time" },
     { value: "1-Click", label: "Fix to Merged PR" },
     { value: "100%", label: "Vercel-Native" },

@@ -1,6 +1,3 @@
-import { Column, Row, Text } from "@once-ui-system/core";
-import styles from "./Dashboard.module.scss";
-
 type KPICardProps = {
   title: string;
   value: string;
@@ -8,35 +5,20 @@ type KPICardProps = {
   trend: "up" | "down";
 };
 
-export const KPICard = ({ title, value, change, trend }: KPICardProps) => {
+export function KPICard({ title, value, change, trend }: KPICardProps) {
   return (
-    <Column
-      flex={1}
-      background="surface"
-      border="neutral-alpha-weak"
-      radius="l"
-      padding="l"
-      gap="8"
-      minWidth={10}
-    >
-      <Text variant="label-default-s" onBackground="neutral-weak">
-        {title}
-      </Text>
-      <Text variant="heading-strong-l">{value}</Text>
-      <Row vertical="center" gap="4">
-        <span className={trend === "up" ? styles.trendUp : styles.trendDown}>
+    <div className="flex-1 min-w-[140px] flex flex-col gap-2 p-6 bg-[var(--surface)] border border-[var(--border)] rounded-xl">
+      <span className="text-xs font-medium text-[var(--muted)]">{title}</span>
+      <span className="text-2xl font-semibold">{value}</span>
+      <div className="flex items-center gap-1">
+        <span className={trend === "up" ? "text-[var(--accent-solid)]" : "text-red-500"}>
           {trend === "up" ? "↑" : "↓"}
         </span>
-        <Text
-          variant="label-default-s"
-          className={trend === "up" ? styles.trendUp : styles.trendDown}
-        >
+        <span className={`text-xs ${trend === "up" ? "text-[var(--accent-solid)]" : "text-red-500"}`}>
           {change}
-        </Text>
-        <Text variant="label-default-s" onBackground="neutral-weak">
-          vs last month
-        </Text>
-      </Row>
-    </Column>
+        </span>
+        <span className="text-xs text-[var(--muted)]">vs last month</span>
+      </div>
+    </div>
   );
-};
+}

@@ -1,165 +1,47 @@
-import "@once-ui-system/core/css/styles.css";
-import "@once-ui-system/core/css/tokens.css";
-import "@/resources/custom.css";
+import "./globals.css";
+import { fonts, home, baseURL } from "@/resources";
+import { Providers } from "@/components/Providers";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import type { Metadata } from "next";
 
-import classNames from "classnames";
-
-import {
-  Background,
-  Column,
-  Flex,
-  Meta,
-  opacity,
-  RevealFx,
-  SpacingToken,
-} from "@once-ui-system/core";
-import { Footer, Header, RouteGuard, Providers } from "@/components";
-import { baseURL, effects, fonts, style, dataStyle, home } from "@/resources";
-
-export async function generateMetadata() {
-  return Meta.generate({
+export const metadata: Metadata = {
+  title: home.title,
+  description: home.description,
+  openGraph: {
     title: home.title,
     description: home.description,
-    baseURL: baseURL,
-    path: home.path,
-    image: home.image,
-  });
-}
+    url: baseURL,
+    images: [{ url: `${baseURL}/api/og/generate?title=${encodeURIComponent(home.title)}` }],
+  },
+};
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <Flex
-      suppressHydrationWarning
-      as="html"
+    <html
       lang="en"
-      fillWidth
-      className={classNames(
-        fonts.heading.variable,
-        fonts.body.variable,
-        fonts.label.variable,
-        fonts.code.variable,
-      )}
+      suppressHydrationWarning
+      className={`${fonts.heading.variable} ${fonts.body.variable} ${fonts.label.variable} ${fonts.code.variable}`}
     >
-      <head>
-        <script
-          id="theme-init"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  const root = document.documentElement;
-                  const defaultTheme = 'dark';
+      <body className="min-h-screen font-[family-name:var(--font-body)]">
+        <Providers>
+          {/* Background effects */}
+          <div className="fixed inset-0 -z-10">
+            <div className="absolute inset-0 bg-gradient-to-b from-[var(--brand-bg)] via-transparent to-transparent" />
+            <div className="absolute inset-0 dot-pattern" />
+          </div>
 
-                  const config = ${JSON.stringify({
-                    brand: style.brand,
-                    accent: style.accent,
-                    neutral: style.neutral,
-                    solid: style.solid,
-                    "solid-style": style.solidStyle,
-                    border: style.border,
-                    surface: style.surface,
-                    transition: style.transition,
-                    scaling: style.scaling,
-                    "viz-style": dataStyle.variant,
-                  })};
-
-                  Object.entries(config).forEach(([key, value]) => {
-                    root.setAttribute('data-' + key, value);
-                  });
-
-                  const resolveTheme = (themeValue) => {
-                    if (!themeValue || themeValue === 'system') {
-                      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                    }
-                    return themeValue;
-                  };
-
-                  const savedTheme = localStorage.getItem('data-theme');
-                  const resolvedTheme = resolveTheme(savedTheme);
-                  root.setAttribute('data-theme', resolvedTheme);
-
-                  const styleKeys = Object.keys(config);
-                  styleKeys.forEach(key => {
-                    const value = localStorage.getItem('data-' + key);
-                    if (value) {
-                      root.setAttribute('data-' + key, value);
-                    }
-                  });
-                } catch (e) {
-                  console.error('Failed to initialize theme:', e);
-                  document.documentElement.setAttribute('data-theme', 'dark');
-                }
-              })();
-            `,
-          }}
-        />
-      </head>
-      <Providers>
-        <Column
-          as="body"
-          background="page"
-          fillWidth
-          style={{ minHeight: "100vh" }}
-          margin="0"
-          padding="0"
-          horizontal="center"
-        >
-          <RevealFx fill position="absolute">
-            <Background
-              mask={{
-                x: effects.mask.x,
-                y: effects.mask.y,
-                radius: effects.mask.radius,
-                cursor: effects.mask.cursor,
-              }}
-              gradient={{
-                display: effects.gradient.display,
-                opacity: effects.gradient.opacity as opacity,
-                x: effects.gradient.x,
-                y: effects.gradient.y,
-                width: effects.gradient.width,
-                height: effects.gradient.height,
-                tilt: effects.gradient.tilt,
-                colorStart: effects.gradient.colorStart,
-                colorEnd: effects.gradient.colorEnd,
-              }}
-              dots={{
-                display: effects.dots.display,
-                opacity: effects.dots.opacity as opacity,
-                size: effects.dots.size as SpacingToken,
-                color: effects.dots.color,
-              }}
-              grid={{
-                display: effects.grid.display,
-                opacity: effects.grid.opacity as opacity,
-                color: effects.grid.color,
-                width: effects.grid.width,
-                height: effects.grid.height,
-              }}
-              lines={{
-                display: effects.lines.display,
-                opacity: effects.lines.opacity as opacity,
-                size: effects.lines.size as SpacingToken,
-                thickness: effects.lines.thickness,
-                angle: effects.lines.angle,
-                color: effects.lines.color,
-              }}
-            />
-          </RevealFx>
-          <Flex fillWidth minHeight="16" s={{ hide: true }} />
           <Header />
-          <Flex zIndex={0} fillWidth padding="l" horizontal="center" flex={1}>
-            <Flex horizontal="center" fillWidth minHeight="0">
-              <RouteGuard>{children}</RouteGuard>
-            </Flex>
-          </Flex>
+          <main className="flex-1 w-full max-w-[1200px] mx-auto px-6 py-8">
+            {children}
+          </main>
           <Footer />
-        </Column>
-      </Providers>
-    </Flex>
+        </Providers>
+      </body>
+    </html>
   );
 }

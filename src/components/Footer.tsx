@@ -1,50 +1,38 @@
-import { Row, IconButton, SmartLink, Text } from "@once-ui-system/core";
 import { social } from "@/resources";
-import styles from "./Footer.module.scss";
+import { iconLibrary } from "@/resources/icons";
 
-export const Footer = () => {
+export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <Row as="footer" fillWidth padding="8" horizontal="center" s={{ direction: "column" }}>
-      <Row
-        className={styles.mobile}
-        maxWidth="m"
-        paddingY="8"
-        paddingX="16"
-        gap="16"
-        horizontal="between"
-        vertical="center"
-        s={{
-          direction: "column",
-          horizontal: "center",
-          align: "center",
-        }}
-      >
-        <Text variant="body-default-s" onBackground="neutral-strong">
-          <Text onBackground="neutral-weak">© {currentYear} /</Text>
-          <Text paddingX="4">MergeWorthy-AI</Text>
-          <Text onBackground="neutral-weak">
-            / Built at Vercel x DeepMind Hackathon
-          </Text>
-        </Text>
-        <Row gap="16">
-          {social.map(
-            (item) =>
-              item.link && (
-                <IconButton
-                  key={item.name}
-                  href={item.link}
-                  icon={item.icon}
-                  tooltip={item.name}
-                  size="s"
-                  variant="ghost"
-                />
-              ),
-          )}
-        </Row>
-      </Row>
-      <Row height="80" hide s={{ hide: false }} />
-    </Row>
+    <footer className="w-full px-6 py-8">
+      <div className="max-w-[768px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4 py-4 px-4">
+        <p className="text-sm text-[var(--muted)] text-center md:text-left">
+          <span>© {currentYear}</span>
+          <span className="mx-1">/</span>
+          <span className="text-[var(--foreground)]">MergeWorthy-AI</span>
+          <span className="mx-1">/</span>
+          <span>Built at Vercel x DeepMind Hackathon</span>
+        </p>
+        <div className="flex gap-4">
+          {social.map((item) => {
+            const Icon = iconLibrary[item.icon];
+            if (!Icon || !item.link) return null;
+            return (
+              <a
+                key={item.name}
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg hover:bg-[var(--surface)] transition-colors text-[var(--muted)] hover:text-[var(--foreground)]"
+                title={item.name}
+              >
+                <Icon className="w-4 h-4" />
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </footer>
   );
-};
+}
