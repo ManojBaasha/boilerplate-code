@@ -22,7 +22,7 @@ const home: Home = {
   title: "MergeWorthy-AI | Your UI fixed by AI",
   description:
     "Describe a UI fix in plain English. Up to 8 AI models race to solve it. Compare live previews. Merge the best.",
-  headline: <>Your UI fixed by AI. You pick the winner.</>,
+  headline: <>Ship better UI, faster. Let AI compete for the best fix.</>,
   featured: {
     display: true,
     title: <>Built at Vercel x DeepMind Hackathon</>,
@@ -30,8 +30,9 @@ const home: Home = {
   },
   subline: (
     <>
-      Describe a fix in plain English. Up to 8 AI models from Google, Anthropic,
-      and OpenAI generate competing solutions. Compare live Vercel previews. Merge the best one.
+      Describe a UI fix in plain English. Up to 8 AI models from Google, Anthropic,
+      and OpenAI race to solve it in parallel. Review live Vercel previews side by
+      side, then merge the best solution with one click.
     </>
   ),
   features: [
