@@ -21,6 +21,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className="w-full max-w-[1200px] mx-auto flex flex-col items-center">
+      <h1 className="text-2xl font-semibold mb-4">Your UI fixed by AI; you pick the winner.</h1>
       <HeroSection />
       <BuiltWithBar />
       <FeaturesSection />
