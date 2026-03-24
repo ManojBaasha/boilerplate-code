@@ -22,7 +22,7 @@ const home: Home = {
   title: "MergeWorthy-AI | Your UI fixed by AI",
   description:
     "Describe a UI fix in plain English. Up to 8 AI models race to solve it. Compare live previews. Merge the best.",
-  headline: <>Elevate Your Code with Intelligent Merging</>,
+  headline: <>Merge Like a Pro!</>,
   featured: {
     display: true,
     title: <>Built at Vercel x DeepMind Hackathon</>,
@@ -30,8 +30,7 @@ const home: Home = {
   },
   subline: (
     <>
-      Harness advanced AI solutions to streamline your workflow and deliver flawless
-      code merges every time.
+      Your go-to AI buddy for effortless merging. {"Let's"} get it!
     </>
   ),
   features: [
