@@ -25,8 +25,8 @@ export function HeroSection() {
       )}
 
       <FadeIn delay={0.1}>
-        <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-center text-balance">
-          {home.headline}
+        <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-center leading-tight">
+          Level Up Your Game <br /> with AI Magic!
         </h1>
       </FadeIn>
 
