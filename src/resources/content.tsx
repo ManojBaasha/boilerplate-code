@@ -25,12 +25,12 @@ const home: Home = {
   headline: <>Merge Like a Pro!</>,
   featured: {
     display: true,
-    title: <>Built at Vercel x DeepMind Hackathon</>,
+    title: <>Built at Vercel x DeepMind Hackathon — fr fr 🚀</>,
     href: "#workflow",
   },
   subline: (
     <>
-      Your go-to AI buddy for effortless merging. {"Let's"} get it!
+      Lowkey the smartest way to get your PRs merged. AI models race to fix your UI — you just pick the bussin one and vibe. Periodt.
     </>
   ),
   features: [

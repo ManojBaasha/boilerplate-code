@@ -26,7 +26,7 @@ export function HeroSection() {
 
       <FadeIn delay={0.1}>
         <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-center leading-tight">
-          Level Up Your Game <br /> with AI Magic!
+          UI Fixes That Actually Slap,&nbsp;<br /> No Cap 🔥
         </h1>
       </FadeIn>
 
@@ -44,7 +44,7 @@ export function HeroSection() {
             href={githubLink}
             className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--brand-solid)] text-white rounded-lg font-medium hover:opacity-90 transition"
           >
-            Get Started
+            Say Less, Let&apos;s Go
             <HiArrowRight className="w-4 h-4" />
           </Link>
           <Link
